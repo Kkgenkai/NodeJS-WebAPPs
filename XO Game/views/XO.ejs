@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XO Game</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="list">
+            <h1 id="numOfUsers">Online Players: 0</h1>
+            <h3 id="thisUser">Your ID: MyID</h3>
+            <hr>
+
+            <div>
+                <p>Current Live Matches: </p>
+                <div id="onGoingGames"> <!--Busted Needs Fix-->
+
+                </div>
+            </div>
+
+            <hr>
+
+            <div id="ListOfUsers">
+                <p>Other Players: </p>
+            </div>
+        </nav>
+
+        <div class="gameArena">
+            <div class="infoPanel">
+                <div class="gInfo">
+                    <p>Finding A Match <img width="20" height="20" src="https://img.icons8.com/ios-filled/50/loading-sign.png" alt="loading-sign"/></p>
+                </div>
+
+                <div class="turn">
+                    <p></p>
+                </div>
+            </div>
+            <div class="displayNone XObox">
+                <button class="button" onclick = "this. disabled = true; "></button>
+                <button class="button" onclick = "this. disabled = true; "></button>
+                <button class="button" onclick = "this. disabled = true; "></button>
+                <button class="button" onclick = "this. disabled = true; "></button>
+                <button class="button" onclick = "this. disabled = true; "></button>
+                <button class="button" onclick = "this. disabled = true; "></button>
+                <button class="button" onclick = "this. disabled = true; "></button>
+                <button class="button" onclick = "this. disabled = true; "></button>
+                <button class="button" onclick = "this. disabled = true; "></button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/static/index.js"></script>
+</body>
+</html>

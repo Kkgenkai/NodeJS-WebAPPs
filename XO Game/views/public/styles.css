@@ -1,0 +1,97 @@
+body{
+    background-color: rgb(179, 70, 70);
+}
+
+.container{
+    display: flex;
+    height: 95vh;
+    border: 2px solid black;
+}
+
+.list{
+    background: linear-gradient(salmon, red);
+    flex: 1;
+    border: 2px solid burlywood;
+    padding: 1px 0px 0px 10px;
+}
+
+.gameArena{
+    background: linear-gradient(rgb(212, 211, 185), rgb(219, 250, 163));
+    flex: 5;
+    display: flex;
+    flex-direction: column;
+    border: 3px solid green;
+}
+
+.displayNone{
+    display: none;
+}
+
+.XObox {
+    margin-top: auto;
+    margin-bottom: auto;
+    align-self: center;
+    justify-self: center;
+
+    width: 35%;
+    height: 50%;
+    border: 2px solid;
+    border-radius: 5px;
+    display: flex !important;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.button {
+    width: 33.33%; /* Adjust width for an exact 3-column fit */
+    height: 33.33%; /* Adjust height for an exact 3-row fit */
+    box-sizing: border-box; /* Include padding and borders in width/height */
+    margin: 0; /* Remove any default margins */
+    padding: 0; /* Remove any default padding */
+}
+
+.infoPanel{
+    border: 2px solid black;
+    border-left: 0px;
+    border-right: 0px;
+    border-top: 0px;
+    border-bottom-left-radius: 25px;
+    width: 100%;
+    box-shadow: 3px 3px 14px 0px;
+    height: 13%;
+    display: flex;
+    background: linear-gradient(rgb(114, 157, 250), rgb(135, 29, 255));
+}
+
+.gInfo{
+    width: 85%;
+    text-align: center;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.turn{
+    border: 6px double black;
+    border-top: 0px;
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    height: 200%;
+    width: 14.3%;
+    background-color: rgb(250, 219, 45);
+    justify-self: flex-end;
+    text-align: center;
+    font-size: 30px;
+}
+
+@keyframes loading {
+    0% { transform: rotateZ(0deg); }
+    100% { transform: rotateZ(360deg); }
+}
+
+.gInfo img{
+    animation-name: loading;
+    animation-duration: .7s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
