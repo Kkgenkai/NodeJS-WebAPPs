@@ -1,0 +1,26 @@
+<%- include('./partials/header.ejs') %>
+    <form action="/compose" method="post">
+        <label for="title">Diary Title</label>
+        <input id="title" type="text" name="title" required autofocus>
+        <input id="date" type="date" name="date" required><br>
+
+        <label for="content">Diary Content</label><br>
+        <textarea id="content" name="content" cols="100" rows="20" required></textarea><br>
+        <button type="submit">Save</button>
+    </form>
+
+    <script>
+        // Get today's date
+        const today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); // January is 0!
+        const yyyy = today.getFullYear();
+    
+        // Format as YYYY-MM-DD
+        const defaultDate = `${yyyy}-${mm}-${dd}`;
+        
+        // Set the default value of the date input
+        document.getElementById('date').value = defaultDate;
+    </script>
+</body>
+</html>

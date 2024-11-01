@@ -1,0 +1,8 @@
+<%- include('./partials/header.ejs') %>
+    <h1><%=diary.title%> | @Date: <span><%=diary.date%></span></h3>
+    <h4><%=diary.content%></h4>
+    <form action="/edit" method="post">
+        <button type="submit" name="edit" value="<%=diary.id%>">Edit</button>
+    </form>
+</body>
+</html>

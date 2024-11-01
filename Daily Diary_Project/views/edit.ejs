@@ -1,0 +1,16 @@
+<%- include('./partials/header.ejs') %>
+    <form action="/update" method="post">
+        <label for="title">Diary Title</label>
+        <input id="title" type="text" name="title" value="<%=diary.title%>" required autofocus>
+        <input type="date" name="date" value="<%=diary.date%>" required><br>
+
+        <label for="content">Diary Content</label><br>
+        <textarea id="content" name="content" cols="150" rows="25" required><%=diary.content%></textarea><br>
+        <button type="submit"  name="update" value="<%=diary.id%>">Update</button>
+    </form>
+
+    <form action="/delete" method="post">
+        <button type="submit" name="delete" value="<%=diary.id%>">Delete</button>
+    </form>
+</body>
+</html>

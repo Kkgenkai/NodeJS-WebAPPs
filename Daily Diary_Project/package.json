@@ -1,0 +1,20 @@
+{
+  "name": "project-diary",
+  "version": "1.0.0",
+  "description": "Diary Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Diary"
+  ],
+  "author": "Kkgenkai",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^8.7.1"
+  }
+}

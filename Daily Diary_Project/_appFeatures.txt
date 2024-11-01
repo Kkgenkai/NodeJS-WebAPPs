@@ -1,0 +1,13 @@
+Daily Diary App:
+
+version 1;
+    Features
+1. Composing A Diary
+    . Title, Content, Date
+2. Viewing Diary
+    . List of All Diaries: with Shortned Content
+        * Sorting Option: Default Latest
+    . Full View Of The Diary: In an Other Tab
+3. Deleteing A Specific Diary
+4. Updating A Specific Diary
+    . Takes to the Updating Page

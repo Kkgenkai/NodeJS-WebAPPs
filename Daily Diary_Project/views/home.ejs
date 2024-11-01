@@ -1,0 +1,29 @@
+<%- include('./partials/header.ejs') %>
+    <h1>List of Diaries</h1>
+    <label for="sortBy">Sort By: </label>
+    <select id="sortBy" name="sortBy" onchange="sort()">
+        <option value="latest">Latest</option>
+        <option value="oldest">Oldest</option>
+    </select>
+    <hr>
+    <a href="/compose"><input type="button" value="New Diary +"></a>
+    
+    <div class="container">
+        <% diaries.forEach(diary => { %>
+            <div class="diaries">    
+                <h3><%=diary.title%> |: <span><%=diary.date%></span></h3>
+                <p><%=diary.content.slice(0, 500) + '....'%>
+                    <form action="/edit" method="post">
+                        <button type="submit" name="edit" value="<%=diary.id%>">Edit</button>
+                        <a href="/diary/<%=diary.id%>">Read More</a>
+                    </form>
+                </p>
+            </div>
+        <% }); %>
+    </div>
+    
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/static/sort.js"></script>
+</body>
+</html>
