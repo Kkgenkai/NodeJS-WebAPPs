@@ -1,0 +1,9 @@
+1. General Group Chat
+   * When somebody joins the server he automatically enters group Chat
+   * DS To Store all The Group Messages and Render it back
+2. Individual Chat(Kinda Done)
+   * Select a User and Chat Between One another
+   * DS with Id = thisUsersId + theOtherUsersID
+   * Render The DS for only Both Of Them
+
+3. Group Chats(Room) --- To Be Added

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat App</title>
+    <style>
+        .container{
+            display: flex;
+            height: 95vh;
+            border: 2px solid black;
+        }
+
+        .chatList{
+            flex: 1;
+            border: 2px solid burlywood;
+            padding: 1px 0px 0px 10px;
+        }
+
+        .chatBody{
+            flex: 5;
+            display: flex;
+            flex-direction: column;
+            border: 3px solid green;
+        }
+
+        .chatDisplayer{
+            flex: 2;
+            border: 4px solid;
+        }
+        #messages { list-style-type: none; margin: 0; padding: 0; }
+        #messages > li { padding: 0.5rem 1rem; }
+        #messages > li:nth-child(odd) { background: #efefef; }
+
+        .chatCreater{
+            padding: 2px;
+        }
+
+        #input{
+            width: 94%;
+        }
+
+        #input:focus { outline: none; }
+        
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav class="chatList">
+            <h1 id="numOfUsers">Users: 0</h1>
+            <h2 id="thisUser">Me: </h2>
+            <button id="GENERAL">#General</button>
+            <hr>
+
+            <div id="ListOfUsers">
+                <p>Other Users: </p>
+            </div>
+        </nav>
+
+        <div class="chatBody">
+            <div class="chatDisplayer">
+                <ul id="messages"></ul>
+            </div>
+
+            <div class="chatCreater">
+                <form id="form" action="/">
+                    <input id="input" autocomplete="off"/>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        let thisUsersID = null;
+        let users = $('#numOfUsers');
+        let thisUser = $('#thisUser');
+
+        let nav = $('.chatList');
+        let listOfUsers = $('#ListOfUsers');
+        let form = $('#form');
+        let input = $('#input');
+        let ul = $('#messages');
+
+        let general = $('#GENERAL');
+        let isGeneral = true;
+
+        $(document).on('load', (event)=>{
+            isGeneral = true;
+            ul.empty();
+            socket.emit('#General', 'GN');
+        });
+        
+        general.on('click', (event)=>{
+            isGeneral = true;
+            ul.empty();
+            socket.emit('#General', 'GN');
+        });
+
+        listOfUsers.on('click', event=>{
+            if(event.target.id !== 'ListOfUsers' && event.target.id.length !== 0){
+                isGeneral = false;
+                let OtherUser = event.target.id;
+                ul.empty();
+                socket.emit('#Individual', OtherUser);
+            }
+        });
+
+        form.on('submit', (event)=>{
+            event.preventDefault();
+
+            if(input.val()){
+                let message = input.val();
+                socket.emit('message', {message, isGeneral});
+                input.val("");
+            }
+        });
+
+
+        
+        socket.on("yourID", data=>{
+            thisUsersID = data;
+            thisUser.text(`Me: ${thisUsersID.slice(0, 7)}`);
+        });
+
+        socket.on("numberOfUsersConnected", data=>{
+            users.text(`Users: ${data}`);
+        });
+
+        socket.on('ListOfUsers', data=>{
+            data.connectedSockets.forEach(socketID =>{
+                if(socketID !== thisUsersID && $('#' + socketID).length === 0){
+                    const user = document.createElement('button');
+                    user.setAttribute('id', socketID);
+                    user.setAttribute('style', 'display: block');
+                    user.textContent = `User: ${socketID.slice(0, 7)}`;
+                    listOfUsers.append(user);
+                }
+            })
+
+            if(data.disId){
+                $("#" + data.disId).remove();
+            }
+        });
+
+
+
+
+        //#General
+        socket.on('general', msg=>{
+            if(isGeneral){
+                const message = document.createElement('li');
+                message.textContent = msg;
+                ul.append(message);
+                window.scrollTo(0, document.body.scrollHeight); 
+            }
+        });
+
+        socket.on('generalChosen', data=>{
+            isGeneral = true;
+            data.generalDB.forEach(msg=>{
+                const message = document.createElement('li');
+                message.textContent = msg;
+                ul.append(message);
+            });
+            window.scrollTo(0, document.body.scrollHeight); 
+        });
+
+        socket.on('individual', msg=>{
+            if(!isGeneral){
+                const message = document.createElement('li');
+                message.textContent = msg;
+                ul.append(message);
+                window.scrollTo(0, document.body.scrollHeight); 
+            }
+        });
+
+        socket.on('IndividualChosen', data=>{
+            isGeneral = false;
+            data.message.forEach(msg=>{
+                const message = document.createElement('li');
+                message.textContent = msg;
+                ul.append(message);
+            });
+            window.scrollTo(0, document.body.scrollHeight); 
+        });
+
+    </script>
+</body>
+</html>
